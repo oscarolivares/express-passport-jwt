@@ -8,7 +8,7 @@ Router.post('/login', authController.login);
 //aRouter.get('/logout', authVerify, sessionController.logout);
 
 Router.get('/user-info', authMiddleware.authVerify, (req, res) => {
-  res.json(req.user.email);
+  res.json(req.payload.email);
 });
 
 module.exports = Router;

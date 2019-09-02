@@ -1,18 +1,19 @@
 const passport = require('passport');
 
 exports.authVerify = (req, res, next) => {
-  passport.authenticate('jwt', { session: false }, (err, user, info) => {
+  passport.authenticate('jwt', { session: false }, (err, result, info) => {
     // Check for errors
     if (err) {
       return next(err);
     }
-    // Check if one user was returned from JwtStrategy
-    if (!user) {
+    // When the result is an entire user
+    // check if one user was returned from JwtStrategy
+    /* if (!result) {
       return res.status(400).send(info.message);
-    }
+    } */
 
     //If all is ok insert user in request
-    req.user = user;
+    req.payload = result;
     next();
   })(req, res, next);
 };
