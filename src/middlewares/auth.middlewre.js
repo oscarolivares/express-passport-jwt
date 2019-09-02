@@ -6,13 +6,13 @@ exports.authVerify = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    // When the result is an entire user
-    // check if one user was returned from JwtStrategy
-    /* if (!result) {
-      return res.status(400).send(info.message);
-    } */
 
-    //If all is ok insert user in request
+    // Check for empty result
+    if (!result) {
+      return res.status(400).send(info.message);
+    }
+
+    //If all is ok insert result in request
     req.payload = result;
     next();
   })(req, res, next);

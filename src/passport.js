@@ -36,10 +36,10 @@ passport.use(
       algorithms: [process.env.JWT_ALGORITHM]
     },
     (jwtPayload, done) => {
-      // Return only payload to prevent call to db on every authVerify
+      // Return only payload to prevent call to db in each authVerify
       return done(null, jwtPayload);
 
-      // If return all user info is needed
+      // If it is necessary to return all user information instead of just the payload
       /* User.findById(jwtPayload.sub, (err, user) => {
         if (err) return done(err);
         if (!user) return done(null, false, { message: 'User does not exist' });
